@@ -1,0 +1,33 @@
+# folder-specifications
+SYNC_HOME="/var/run/arm"
+SYNC_LOGS="/var/log/arm/"
+SYNC_FILES="/var/lib/arm/"
+SYNC_LOCK="$SYNC_HOME/arm.lock"
+
+# alternate version of folder-specifications
+#SYNC_HOME="/home/arm/"
+#SYNC_LOGS="$SYNC_HOME/logs"
+#SYNC_FILES="$SYNC_HOME/files"
+#SYNC_LOCK="$SYNC_HOME/arm.lock"
+
+# Leave the array blank, to sync the whole mirror
+#SYNC_REPO=(core extra community multilib iso)
+
+# have a look at the mirror-list to use a mirror, which suites your needs
+#SYNC_SERVER=rsync.archlinux.org::ftp
+#SYNC_SERVER=rsync.selfnet.de::archlinux
+SYNC_SERVER=mirror.de.leaseweb.net::archlinux
+
+# Format of the logfile-name
+LOG_FILE="pkgsync_$(date +%Y%m%d-%H).log"
+
+# increase/decrease verbosity
+# 0 should generate no STDOUT-Output
+VERBOSITY=1
+
+# RSYNC-Options
+# these are the default options
+#SYNC_OPTIONS=('-rptvL' '--delete-after' '--delay-updates')
+#SYNC_OPTIONS+=('--foobar')
+# to ignore some archs, just add:
+#SYNC_OPTIONS+=('--exclude=os/i686')
