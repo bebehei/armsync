@@ -1,0 +1,4 @@
+SYNC_HOME=/home/arm
+VARS_FILE=/home/arm/vars.sh
+0 * * * * $SYNC_HOME/armsync.sh
+1 * * * * $SYNC_HOME/armsnap.sh

@@ -26,7 +26,7 @@ function log(){
 #Provide default sync-options
 SYNC_OPTIONS=('-rptvL' '--delete-after' '--delay-updates')
 
-. $SYNC_VARS
+. $VARS_FILE
 
 # check variables
 [ -z $SYNC_HOME ] && die "SYNC_HOME is not initialized"
