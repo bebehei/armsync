@@ -1,0 +1,19 @@
+# alternative version of folder-specifications
+SYNC_HOME=/home/arm
+SYNC_LOGS=$SYNC_HOME/logs
+SYNC_FILES=$SYNC_HOME/files/mirror
+SYNC_LOCK=$SYNC_HOME/arm.lock
+
+# folder, where the actual rollback is stored
+SNAP_FILES=$SYNC_HOME/files/arm/
+
+# Uncomment this, if you want to sync only some repositories
+# if you don't initialize it, it will sync the whole server
+SYNC_REPO=(core extra community multilib)
+
+# have a look at the mirror-list to use a mirror, which suites your needs
+#SYNC_SERVER=rsync.archlinux.org::ftp
+#SYNC_SERVER=rsync.selfnet.de::archlinux
+SYNC_SERVER=mirror.de.leaseweb.net::archlinux
+
+VERBOSITY=0

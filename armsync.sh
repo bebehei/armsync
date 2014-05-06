@@ -20,11 +20,15 @@ function info(){
 }
 
 function log(){
-	echo $@ >> "$SYNC_LOGS/$LOG_FILE"
+	echo $@ >> "$SYNC_LOGS/$SYNC_LOGFILE"
 }
 
-#Provide default sync-options
+# provide default values
 SYNC_OPTIONS=('-rptvL' '--delete-after' '--delay-updates')
+LOG_FILE="pkgsync_$(date +%Y%m%d-%H).log"
+
+[ -z $VARS_FILE ] && die VARS_FILE not defined
+[ -r $VARS_FILE ] && die VARS_FILE not readable
 
 . $VARS_FILE
 
@@ -33,7 +37,6 @@ SYNC_OPTIONS=('-rptvL' '--delete-after' '--delay-updates')
 [ -z $SYNC_LOGS ] && die "SYNC_LOGS is not initialized"
 [ -z $SYNC_FILES ] && die "SYNC_FILES is not initialized"
 [ -z $SYNC_SERVER ] && die "SYNC_SERVER is not initialized"
-[ -z $LOG_FILE ] && die "LOG_FILE is not initialized"
 
 [ ! -d $SYNC_HOME ] && die "$SYNC_HOME does not exist"
 [ ! -d $SYNC_LOGS ] && die "$SYNC_LOGS does not exist"
@@ -56,7 +59,7 @@ fi
 touch "$SYNC_LOCK"
 
 # start logfile and timestamp it
-touch "$SYNC_LOGS/$LOG_FILE"
+touch "$SYNC_LOGS/$SYNC_LOGFILE"
 log "============================================="
 log ">> Starting sync on $(date --rfc-3339=seconds)"
 log ">> ---"
@@ -67,7 +70,7 @@ for src in ${SOURCES[@]}; do
     log ">> Syncing $src to $SYNC_FILES/$repo"
 
 		# sync the repository
-    rsync ${SYNC_OPTIONS[@]} $src "$SYNC_FILES" >> "$SYNC_LOGS/$LOG_FILE"
+    rsync ${SYNC_OPTIONS[@]} $src "$SYNC_FILES" >> "$SYNC_LOGS/$SYNC_LOGFILE"
 
 		# wait after every repo to finish rsync-connections
 		# avoids failing rsync of too much connections
@@ -81,5 +84,5 @@ log "============================================="
 log
 
 # unlock the ARM
-rm -f "$SYNC_LOCK"
+rm -f $SYNC_LOCK
 exit 0

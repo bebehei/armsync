@@ -14,13 +14,17 @@ function log(){
 	echo $@ >> "$SYNC_LOGS/$LOG_FILE"
 }
 
+# provide default values
+SNAP_TIME="$(date +%Y/%m/%d/%H)"
+
+[ -z $VARS_FILE ] && die VARS_FILE not defined
+[ -r $VARS_FILE ] && die VARS_FILE not readable
+
 . $VARS_FILE
 
-if [ $SNAP_WAIT_SYNC -eq 1 ]; then
-	while [ -f $SYNC_LOCK ]; do
-		sleep 1;
-	done
-fi
+while [ -f $SYNC_LOCK ]; do
+	sleep 1;
+done
 
 mkdir -p $SNAP_FILES/$SNAP_TIME
 
