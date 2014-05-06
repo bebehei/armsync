@@ -25,10 +25,10 @@ function log(){
 
 # provide default values
 SYNC_OPTIONS=('-rptvL' '--delete-after' '--delay-updates')
-LOG_FILE="pkgsync_$(date +%Y%m%d-%H).log"
+SYNC_LOGFILE="pkgsync_$(date +%Y%m%d-%H).log"
 
 [ -z $VARS_FILE ] && die VARS_FILE not defined
-[ -r $VARS_FILE ] && die VARS_FILE not readable
+[ ! -r $VARS_FILE ] && die VARS_FILE not readable
 
 . $VARS_FILE
 
