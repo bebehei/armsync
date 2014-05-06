@@ -2,3 +2,16 @@ ARMsync
 =======
 
 This is a little scriptset to generate an ArchLinux rollback machine.
+
+How to set it up?
+=================
+
+The easy way:
+1. cp vars.sh.example vars.sh
+2. edit the SYNC_SERVER and SYNC_HOME variables in vars.sh:
+   let point SYNC_HOME into this git-directory
+	 point SYNC_SERVER to the best server for you, which is rsync-capable
+3. copy the cronjobs to your crontab
+
+The hard way:
+There is no such way known yet!
