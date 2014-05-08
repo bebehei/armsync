@@ -18,7 +18,7 @@ function log(){
 SNAP_TIME="$(date +%Y/%m/%d/%H)"
 
 [ -z $VARS_FILE ] && die VARS_FILE not defined
-[ -r $VARS_FILE ] && die VARS_FILE $VARS_FILE not readable
+[ ! -r $VARS_FILE ] && die VARS_FILE $VARS_FILE not readable
 
 . $VARS_FILE
 
